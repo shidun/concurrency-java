@@ -15,7 +15,7 @@ public class VectorExample2 {
     private static Vector<Integer> vector = new Vector<>();
 
     public static void main(String[] args) {
-        while (true) {
+//        while (true) {
             for (int i = 0; i< 10; i++) {
                 vector.add(i);
             }
@@ -29,6 +29,13 @@ public class VectorExample2 {
                 }
             };
 
+            Runnable thread3 = new Runnable() {
+                @Override
+                public void run() {
+                    log.info("2222222");
+                }
+            };
+
             Thread thread2 = new Thread(){
                 public void run() {
                     for (int i = 0; i< vector.size(); i++) {
@@ -37,8 +44,11 @@ public class VectorExample2 {
                     }
                 }
             };
-            thread1.start();
-            thread2.start();
+//            thread1.start();
+//            thread2.start();
+            new Thread(thread3).start();
+            new Thread(thread3).start();
+            new Thread(thread3).start();
         }
-    }
+//    }
 }

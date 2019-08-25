@@ -36,15 +36,28 @@ public class VectorExample {
         final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
         for (int i = 0; i< clientTotal; i++) {
             final int count2 = i;
-            executorService.execute(() -> {
-                try {
-                    semaphore.acquire();
-                    update(count2);
-                    semaphore.release();
-                } catch (Exception e) {
-                    log.error("exception:", e);
+//            executorService.execute(() -> {
+//                try {
+//                    semaphore.acquire();
+//                    update(count2);
+//                    semaphore.release();
+//                } catch (Exception e) {
+//                    log.error("exception:", e);
+//                }
+//                countDownLatch.countDown();
+//            });
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        semaphore.acquire();
+                        update(count2);
+                        semaphore.release();
+                    } catch (Exception e) {
+                        log.error("exception:", e);
+                    }
+                    countDownLatch.countDown();
                 }
-                countDownLatch.countDown();
             });
         }
         countDownLatch.await();
