@@ -24,13 +24,13 @@ public class ForkJoinTaskExample extends RecursiveTask<Integer> {
         int sum = 0;
 
         boolean canCompute = (end - start) <= threashold;
-        if (canCompute) {
-            for (int i = start; i <= end; i++) {
-                sum += i;
-            }
-        } else {
-            int middle = (start + end) / 2;
-            ForkJoinTaskExample leftTask = new ForkJoinTaskExample(start,middle);
+            if (canCompute) {
+                for (int i = start; i <= end; i++) {
+                    sum += i;
+                }
+            } else {
+                int middle = (start + end) / 2;
+                ForkJoinTaskExample leftTask = new ForkJoinTaskExample(start,middle);
             ForkJoinTaskExample rightTask = new ForkJoinTaskExample(middle + 1, end);
 
             leftTask.fork();

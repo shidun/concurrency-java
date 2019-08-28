@@ -20,7 +20,6 @@ import java.util.concurrent.locks.StampedLock;
 @Slf4j
 public class LockExample6 {
 
-
     public static void main(String[] args) throws Exception{
         ReentrantLock reentrantLock = new ReentrantLock();
         Condition condition = reentrantLock.newCondition();
